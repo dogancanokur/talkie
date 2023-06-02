@@ -1,0 +1,8 @@
+${AnsiColor.BRIGHT_CYAN}  ,--.         ,--.,--.    ,--.
+${AnsiColor.BRIGHT_RED},-'  '-.,--,--.|  ||  |,-. `--' ,---.
+${AnsiColor.BRIGHT_CYAN}'-.  .-' ,-.  ||  ||     / ,--.| .-. :
+${AnsiColor.BRIGHT_RED}  |  | \ '-'  ||  ||  \  \ |  |\   --.
+${AnsiColor.BRIGHT_CYAN}  `--'  `--`--'`--'`--'`--'`--' `----'
+
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}
