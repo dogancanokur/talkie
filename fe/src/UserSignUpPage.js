@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import {signup} from "./apiCalls";
 
 class UserSignUpPage extends React.Component {
 
@@ -8,6 +8,7 @@ class UserSignUpPage extends React.Component {
     }
 
     render() {
+        const {pendingApiCall} = this.state;
         return <div>
             <h1 className="text-center">Sign Up</h1>
             <form className="container">
@@ -37,11 +38,10 @@ class UserSignUpPage extends React.Component {
                     <input type="password" className="form-control" id={'repeatPassword'} name={'repeatPassword'}/>
                 </div>
                 <div className={'text-center'}>
-                    <button type="submit" className="btn btn-lg btn-primary" disabled={this.state.pendingApiCall}
+                    <button type="submit" className="btn btn-lg btn-primary" disabled={pendingApiCall}
                             onClick={this.onClickSignUp}>
-                        {this.state.pendingApiCall &&
-                            <div className="spinner-border spinner-border-sm mr-1" role="status">
-                                <span className="visually-hidden">Loading...</span></div>}
+                        {pendingApiCall && <div className="spinner-border spinner-border-sm mr-1" role="status">
+                            <span className="visually-hidden">Loading...</span></div>}
                         Submit
                     </button>
                 </div>
@@ -54,19 +54,19 @@ class UserSignUpPage extends React.Component {
         this.setState({[name]: value});
     }
 
-    onClickSignUp = (event) => {
+    onClickSignUp = async (event) => {
         event.preventDefault();
         this.setState({pendingApiCall: true});
         const {username, displayName, password} = this.state;
         const body = {username, displayName, password};
-        axios.post("/api/1.0/users", body).then(value => {
-            console.error(value.message);
+        try {
+            const response = await signup(body);
+            console.info(response.status + ' -> ' + response.data.message);
             this.setState({pendingApiCall: false});
-
-        }).catch(reason => {
-            console.error(reason.code + " -> " + reason.message);
+        } catch (e) {
+            console.error(e.code + " -> " + e.message);
             this.setState({pendingApiCall: false});
-        });
+        }
     }
 }
 
