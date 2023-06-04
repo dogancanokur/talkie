@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import net.okur.talkie.shared.UniqueUsername;
 
 /**
  * @author dogancan.okur
@@ -16,6 +17,7 @@ public class UserInput {
     @NotNull
     @Size(min = 4, max = 32, message = "Username must be between 4 and 32 characters")
     @Pattern(regexp = "^(?=.*[0-9a-zA-Z]).{4,20}$", message = "Username must contain only letters and numbers")
+    @UniqueUsername
     String username;
     @NotNull
     @Size(min = 4, max = 64, message = "Display name must be between 4 and 64 characters")
