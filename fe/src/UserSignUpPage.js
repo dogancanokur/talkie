@@ -4,11 +4,11 @@ import {signup} from "./apiCalls";
 class UserSignUpPage extends React.Component {
 
     state = {
-        username: null, displayName: null, password: null, repeatPassword: null, pendingApiCall: false
+        username: null, displayName: null, password: null, repeatPassword: null, pendingApiCall: false, errors: {}
     }
 
     render() {
-        const {pendingApiCall} = this.state;
+        const {pendingApiCall, errors} = this.state;
         return <div>
             <h1 className="text-center">Sign Up</h1>
             <form className="container">
@@ -20,22 +20,34 @@ class UserSignUpPage extends React.Component {
                 {/*</div>*/}
                 <div className="mb-3">
                     <label htmlFor={'displayName'} className="form-label">Display Name</label>
-                    <input className="form-control" id={'displayName'} name={'displayName'} autoComplete={'off'}
-                           type="text" onChange={this.onChangeInput}/>
+                    <input className={(errors.displayName ? 'is-invalid ' : '') + 'form-control'}
+                           id={'displayName'} name={'displayName'} required
+                           autoComplete={'off'} onChange={this.onChangeInput} type="text"/>
+                    <div className="invalid-feedback">{this.state.errors.displayName}</div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor={'username'} className="form-label">Username</label>
-                    <input className="form-control" id={'username'} name={'username'} autoComplete={'off'}
-                           type="text" onChange={this.onChangeInput}/>
+                    <div className="input-group has-validation">
+                        <span className="input-group-text" id={'usernameInputGroupPrepend'}>@</span>
+                        <input className={(errors.username ? 'is-invalid ' : '') + 'form-control'}
+                               id={'username'} name={'username'} required
+                               autoComplete={'off'} onChange={this.onChangeInput}
+                               aria-describedby={'usernameInputGroupPrepend'} type="text"/>
+                        <div className="invalid-feedback">{this.state.errors.username}</div>
+                    </div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor={'password'} className="form-label">Password</label>
-                    <input type="password" className="form-control" id={'password'} name={'password'}
-                           onChange={this.onChangeInput}/>
+                    <input className={(errors.password ? 'is-invalid ' : '') + 'form-control'}
+                           id={'password'} name={'password'} required
+                           onChange={this.onChangeInput} type="password"/>
+                    <div className="invalid-feedback">{this.state.errors.password}</div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor={'repeatPassword'} className="form-label">Repeat Password</label>
-                    <input type="password" className="form-control" id={'repeatPassword'} name={'repeatPassword'}/>
+                    <input className={'form-control'}
+                           id={'repeatPassword'} name={'repeatPassword'} required
+                           onChange={this.onChangeInput} type="password"/>
                 </div>
                 <div className={'text-center'}>
                     <button type="submit" className="btn btn-lg btn-primary" disabled={pendingApiCall}
@@ -51,7 +63,11 @@ class UserSignUpPage extends React.Component {
 
     onChangeInput = (event) => {
         const {name, value} = event.target;
-        this.setState({[name]: value});
+        const errors = {...this.state.errors};
+        errors[name] = undefined;
+        this.setState({
+            [name]: value, errors
+        });
     }
 
     onClickSignUp = async (event) => {
@@ -64,7 +80,9 @@ class UserSignUpPage extends React.Component {
             console.info(response.status + ' -> ' + response.data.message);
             this.setState({pendingApiCall: false});
         } catch (e) {
-            console.error(e.code + " -> " + e.message);
+            console.error(e.response.data);
+            let {validationErrors} = e.response.data;
+            this.setState({errors: validationErrors ? validationErrors : {}});
             this.setState({pendingApiCall: false});
         }
     }
