@@ -42,7 +42,11 @@ public class UserServiceImpl implements UserService {
             userOutput.setDisplayName(user.getDisplayName());
             return userOutput;
 
+        } else {
+            UserOutput userOutput = new UserOutput();
+            userOutput.setUsername(savedUser.getUsername());
+            userOutput.setDisplayName(savedUser.getDisplayName());
+            return userOutput;
         }
-        return null;
     }
 }
