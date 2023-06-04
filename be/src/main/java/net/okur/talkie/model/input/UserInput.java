@@ -12,18 +12,18 @@ import net.okur.talkie.shared.UniqueUsername;
  */
 @Data
 public class UserInput {
-    //    @NotNull
+    // @NotNull
     String email;
-    @NotNull
-    @Size(min = 4, max = 32, message = "Username must be between 4 and 32 characters")
-    @Pattern(regexp = "^(?=.*[0-9a-zA-Z]).{4,20}$", message = "Username must contain only letters and numbers")
+    @NotNull(message = "{talkie.validation.constraints.NotNull.username.message}")
+    @Size(min = 4, max = 32, message = "{talkie.validation.constraints.Size.message}")
+    @Pattern(regexp = "^(?=.*[0-9a-zA-Z]).{4,20}$", message = "{talkie.validation.constraints.Pattern.username.message}")
     @UniqueUsername
     String username;
-    @NotNull
-    @Size(min = 4, max = 64, message = "Display name must be between 4 and 64 characters")
+    @NotNull(message = "{talkie.validation.constraints.NotNull.displayName.message}")
+    @Size(min = 4, max = 64, message = "{talkie.validation.constraints.Size.message}")
     String displayName;
-    @NotNull
-    @Size(min = 4, max = 20, message = "Password must be between 4 and 20 characters")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{4,20}$", message = "Password must contain at least one uppercase, one lowercase and one number")
+    @NotNull(message = "{talkie.validation.constraints.NotNull.password.message}")
+    @Size(min = 4, max = 20, message = "{talkie.validation.constraints.Size.message}")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{4,20}$", message = "{talkie.validation.constraints.Pattern.password.message}")
     String password;
 }
