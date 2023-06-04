@@ -26,9 +26,10 @@ class UserSignUpPage extends React.Component {
                        error={errors.password} onChange={this.onChangeInput} isRequired={true}
                        type={'password'}/>
                 <Input id={'repeatPassword'} name={'repeatPassword'} label="Repeat Password" container={'mb-3'}
-                       onChange={this.onChangeInput} isRequired={true} type={'password'}/>
+                       onChange={this.onChangeInput} isRequired={true} type={'password'} error={errors.repeatPassword}/>
                 <div className={'text-center'}>
-                    <button type="submit" className="btn btn-lg btn-primary" disabled={pendingApiCall}
+                    <button type="submit" className="btn btn-lg btn-primary"
+                            disabled={pendingApiCall || errors.repeatPassword}
                             onClick={this.onClickSignUp}>
                         {pendingApiCall && <div className="spinner-border spinner-border-sm mr-1" role="status">
                             <span className="visually-hidden">Loading...</span></div>}
@@ -43,6 +44,11 @@ class UserSignUpPage extends React.Component {
         const {name, value} = event.target;
         const errors = {...this.state.errors};
         errors[name] = undefined;
+        if ((name === 'password' && this.state.repeatPassword !== value) || (name === 'repeatPassword' && this.state.password !== value)) {
+            errors.repeatPassword = 'Password mismatch';
+        } else {
+            errors.repeatPassword = undefined;
+        }
         this.setState({
             [name]: value, errors
         });
