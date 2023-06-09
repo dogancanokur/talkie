@@ -9,4 +9,4 @@ spring:
     username: sa
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
