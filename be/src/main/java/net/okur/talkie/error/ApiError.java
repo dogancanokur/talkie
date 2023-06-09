@@ -1,5 +1,6 @@
 package net.okur.talkie.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Map;
  * 4.06.2023 02:56
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL) //if property is null it will not be serialized
 public class ApiError {
     private int status;
     private String message;
