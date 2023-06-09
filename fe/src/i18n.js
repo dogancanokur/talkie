@@ -11,7 +11,8 @@ i18n.use(initReactI18next).init({
                 'signup.header': 'Sign Up',
                 'signup.password': 'Password',
                 'signup.repeatPassword': 'Repeat Password',
-                'signup.warning.passwordMismatch': 'Password mismatch'
+                'signup.warning.passwordMismatch': 'Password mismatch',
+                'login': 'Login',
             }
         },
         tr: {
@@ -22,12 +23,13 @@ i18n.use(initReactI18next).init({
                 'signup.header': 'Kayıt Ol',
                 'signup.password': 'Şifre',
                 'signup.repeatPassword': 'Şifre Tekrarı',
-                'signup.warning.passwordMismatch': 'Şifreler eşleşmedi.'
+                'signup.warning.passwordMismatch': 'Şifreler eşleşmedi.',
+                'login': 'Giriş Yap'
             }
         }
     },
     lng: "en", // if you're using a language detector, do not define the lng option
-    fallbackLng: "tr",
+    fallbackLng: "en",
     defaultNS: 'translations',
     ns: ['translations'],
     keySeparator: false,
