@@ -1,17 +1,17 @@
 package net.okur.talkie.error;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-
 import java.util.Date;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
+
 /**
- * @author dogancan.okur
- * 4.06.2023 02:56
+ * @author dogancan.okur 4.06.2023 02:56
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL) //if property is null it will not be serialized
+@JsonInclude(JsonInclude.Include.NON_NULL) // if property is null it will not be serialized
 public class ApiError {
     private int status;
     private String message;
@@ -20,8 +20,8 @@ public class ApiError {
     private Map<String, String> validationErrors;
 
     public ApiError(int status, String message, String path) {
-        this.status = status;
-        this.message = message;
-        this.path = path;
+	this.status = status;
+	this.message = message;
+	this.path = path;
     }
 }

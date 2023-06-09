@@ -7,8 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author dogancan.okur
- * 3.06.2023 03:08
+ * @author dogancan.okur 3.06.2023 03:08
  */
 @Getter
 @Setter

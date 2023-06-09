@@ -7,8 +7,7 @@ import lombok.Data;
 import net.okur.talkie.shared.UniqueUsername;
 
 /**
- * @author dogancan.okur
- * 3.06.2023 23:43
+ * @author dogancan.okur 3.06.2023 23:43
  */
 @Data
 public class UserInput {
