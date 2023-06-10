@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import lombok.extern.slf4j.Slf4j;
 import net.okur.talkie.entity.User;
 import net.okur.talkie.error.ApiError;
-import net.okur.talkie.model.output.UserOutput;
 import net.okur.talkie.repository.UserRepository;
+import net.okur.talkie.shared.Views;
 
 /**
  * @author dogancan.okur 10.06.2023
@@ -39,6 +41,7 @@ public class AuthController {
     }
 
     @PostMapping("/api/1.0/auth")
+    @JsonView(Views.Base.class)
     public ResponseEntity<?> handleAuthentication(
 	    @RequestHeader(name = "Authorization", required = false) String authorization) {
 	if (authorization == null) {
@@ -58,10 +61,11 @@ public class AuthController {
 	if (!passwordEncoder.matches(password, hashedPassword)) {
 	    return getUnauthorizedMessage();
 	}
-	UserOutput userOutput = new UserOutput();
-	userOutput.setUsername(userInDb.getUsername());
-	userOutput.setDisplayName(userInDb.getDisplayName());
-	userOutput.setImage(userInDb.getImage());
-	return ResponseEntity.ok().body(userOutput);
+//	UserOutput userOutput = new UserOutput();
+//	userOutput.setUsername(userInDb.getUsername());
+//	userOutput.setDisplayName(userInDb.getDisplayName());
+//	userOutput.setImage(userInDb.getImage());
+//	return ResponseEntity.ok().body(userOutput);
+	return ResponseEntity.ok().body(userInDb);
     }
 }
