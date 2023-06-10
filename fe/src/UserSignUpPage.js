@@ -3,6 +3,7 @@ import {signup} from "./apiCalls";
 import Input from "./components/Input";
 import './i18n';
 import {withTranslation} from "react-i18next";
+import ButtonWithProgress from "./components/ButtonWithProgress";
 
 class UserSignUpPage extends React.Component {
 
@@ -31,14 +32,14 @@ class UserSignUpPage extends React.Component {
                 <Input id={'repeatPassword'} name={'repeatPassword'} label={t('signup.repeatPassword')}
                        container={'mb-3'} onChange={this.onChangeInput} isRequired={true} type={'password'}
                        error={errors.repeatPassword}/>
-                <div className={'text-center'}>
-                    <button type="submit" className="btn btn-lg btn-primary"
-                            disabled={pendingApiCall || errors.repeatPassword} onClick={this.onClickSignUp}>
-                        {pendingApiCall && <div className="spinner-border spinner-border-sm mr-1" role="status">
-                            <span className="visually-hidden"></span></div>}
-                        {t('signup.submit')}
-                    </button>
-                </div>
+                <ButtonWithProgress id={'signup_button'}
+                                    type={'submit'}
+                                    className={'btn btn-lg btn-primary'}
+                                    containerClassName={'text-center'}
+                                    disabled={pendingApiCall || errors.repeatPassword}
+                                    onClick={this.onClickSignUp}
+                                    pendingApiCall={pendingApiCall}
+                                    text={t('signup.submit')}></ButtonWithProgress>
             </form>
         </div>;
     }

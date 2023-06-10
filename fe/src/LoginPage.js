@@ -2,15 +2,17 @@ import React from "react";
 import Input from "./components/Input";
 import {withTranslation} from "react-i18next";
 import {login} from "./apiCalls";
+import axios from "axios";
+import ButtonWithProgress from "./components/ButtonWithProgress";
 
 class LoginPage extends React.Component {
     state = {
-        username: null, password: null, error: null
+        username: null, password: null, error: null, pendingApiCall: false
     }
 
     render() {
         const {t} = this.props;
-        const {username, password} = this.state;
+        const {username, password, pendingApiCall} = this.state;
         const buttonEnabled = username && password;
         return <div>
             <h1 className="text-center">{t('login')}</h1>
@@ -22,11 +24,14 @@ class LoginPage extends React.Component {
                 {this.state.error && <div className="alert alert-danger mt-2" role="alert">
                     {this.state.error}
                 </div>}
-                <div className={'text-center'}>
-                    <button className="btn btn-lg btn-primary" id={'login_submit'} type={'button'}
-                            disabled={!buttonEnabled}
-                            onClick={this.onClickLogin}>{t('login')}</button>
-                </div>
+                <ButtonWithProgress id={'login_button'}
+                                    type={'button'}
+                                    className={'btn btn-lg btn-primary'}
+                                    containerClassName={'text-center'}
+                                    disabled={!buttonEnabled || pendingApiCall}
+                                    onClick={this.onClickLogin}
+                                    pendingApiCall={pendingApiCall}
+                                    text={t('login')}></ButtonWithProgress>
             </form>
         </div>;
     }
@@ -34,8 +39,7 @@ class LoginPage extends React.Component {
     onChangeInput = (event) => {
         const {name, value} = event.target;
         this.setState({
-            [name]: value,
-            error: null
+            [name]: value, error: null
         });
     }
     onClickLogin = async (event) => {
@@ -51,6 +55,20 @@ class LoginPage extends React.Component {
                 error: apiError.response.data.message
             });
         }
+    }
+
+    componentDidMount() {
+        axios.interceptors.request.use(request => {
+            this.setState({pendingApiCall: true});
+            return request;
+        });
+        axios.interceptors.response.use(response => {
+            this.setState({pendingApiCall: false});
+            return response;
+        }, error => {
+            this.setState({pendingApiCall: false});
+            throw error;
+        });
     }
 }
 
