@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
-import net.okur.talkie.configuration.TalkieUserDetails;
+import net.okur.talkie.entity.User;
 import net.okur.talkie.model.output.UserOutput;
 
 /**
@@ -17,13 +17,13 @@ import net.okur.talkie.model.output.UserOutput;
 public class AuthController {
 
   @PostMapping("/api/1.0/auth")
-  public ResponseEntity<?> handleAuthentication(Authentication authentication) {
-    TalkieUserDetails userPrincipal = (TalkieUserDetails)authentication.getPrincipal();
+  public ResponseEntity<UserOutput> handleAuthentication(Authentication authentication) {
+    User userPrincipal = (User)authentication.getPrincipal();
 
     UserOutput userOutput = new UserOutput();
     userOutput.setUsername(userPrincipal.getUsername());
-    userOutput.setDisplayName(userPrincipal.getUser().getDisplayName());
-    userOutput.setImage(userPrincipal.getUser().getImage());
+    userOutput.setDisplayName(userPrincipal.getDisplayName());
+    userOutput.setImage(userPrincipal.getImage());
     return ResponseEntity.ok().body(userOutput);
   }
 }

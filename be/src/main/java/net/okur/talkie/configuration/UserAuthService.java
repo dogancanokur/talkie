@@ -27,6 +27,6 @@ public class UserAuthService implements UserDetailsService {
     if (userInDb == null) {
       throw new UsernameNotFoundException("User not found");
     }
-    return new TalkieUserDetails(userInDb);
+    return userInDb;
   }
 }
