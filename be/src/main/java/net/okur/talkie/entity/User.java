@@ -16,16 +16,16 @@ import lombok.ToString;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
-    @Column(name = "username", unique = true, nullable = false, length = 32)
-    private String username;
-    @Column(name = "display_name", nullable = false, length = 64)
-    private String displayName;
-    @Column(name = "password", nullable = false)
-    private String password;
-    @Column(name = "image")
-    private String image;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @Column(name = "id")
+  private Long id;
+  @Column(name = "username", unique = true, nullable = false, length = 32)
+  private String username;
+  @Column(name = "display_name", nullable = false, length = 64)
+  private String displayName;
+  @Column(name = "password", nullable = false)
+  private String password;
+  @Column(name = "image")
+  private String image;
 }

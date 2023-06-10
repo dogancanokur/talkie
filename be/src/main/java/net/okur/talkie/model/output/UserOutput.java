@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class UserOutput {
-    String username;
-    String displayName;
-    String image;
+  String username;
+  String displayName;
+  String image;
 }

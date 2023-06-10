@@ -20,32 +20,32 @@ import net.okur.talkie.shared.GenericResponse;
  */
 @RestController
 public class UserController {
-    private final UserService userService;
+  private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-	this.userService = userService;
-    }
+  @Autowired
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @PostMapping("/api/1.0/users")
-    @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody GenericResponse createUser(@Valid @RequestBody UserInput userInput) {
-	UserOutput userOutput = userService.createUser(userInput);
-	if (userOutput == null) {
-	    return new GenericResponse("User could not be created");
-	}
-	return new GenericResponse("User created -> " + userOutput.getUsername());
+  @PostMapping("/api/1.0/users")
+  @ResponseStatus(HttpStatus.CREATED)
+  public @ResponseBody GenericResponse createUser(@Valid @RequestBody UserInput userInput) {
+    UserOutput userOutput = userService.createUser(userInput);
+    if (userOutput == null) {
+      return new GenericResponse("User could not be created");
     }
+    return new GenericResponse("User created -> " + userOutput.getUsername());
+  }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleValidationException(MethodArgumentNotValidException exception) {
-	ApiError error = new ApiError(400, "Validation error", "/api/1.0/users");
-	Map<String, String> validationErrors = new HashMap<>();
-	exception.getBindingResult().getFieldErrors()
-		.forEach(fieldError -> validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage()));
-	error.setValidationErrors(validationErrors);
-	return error;
-    }
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ApiError handleValidationException(MethodArgumentNotValidException exception) {
+    ApiError error = new ApiError(400, "Validation error", "/api/1.0/users");
+    Map<String, String> validationErrors = new HashMap<>();
+    exception.getBindingResult().getFieldErrors()
+        .forEach(fieldError -> validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage()));
+    error.setValidationErrors(validationErrors);
+    return error;
+  }
 
 }

@@ -12,18 +12,18 @@ import net.okur.talkie.service.UserService;
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class }) // TODO: security is disabled for now
 public class TalkieApplication {
 
-    public static void main(String[] args) {
-	SpringApplication.run(TalkieApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(TalkieApplication.class, args);
+  }
 
-    @Bean
-    CommandLineRunner createInitialUsers(UserService userService) {
-	return args -> {
-	    UserInput userInput = new UserInput();
-	    userInput.setUsername("user1");
-	    userInput.setDisplayName("display1");
-	    userInput.setPassword("P4ssword");
-	    userService.createUser(userInput);
-	};
-    }
+  @Bean
+  CommandLineRunner createInitialUsers(UserService userService) {
+    return args -> {
+      UserInput userInput = new UserInput();
+      userInput.setUsername("user1");
+      userInput.setDisplayName("display1");
+      userInput.setPassword("P4ssword");
+      userService.createUser(userInput);
+    };
+  }
 }

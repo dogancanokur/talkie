@@ -23,45 +23,45 @@ import net.okur.talkie.repository.UserRepository;
 @RestController
 @Slf4j
 public class AuthController {
-    public static final int UNAUTHORIZED_CODE = 401;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+  public static final int UNAUTHORIZED_CODE = 401;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public AuthController(UserRepository userRepository) {
-	this.userRepository = userRepository;
-	this.passwordEncoder = new BCryptPasswordEncoder();
-    }
+  @Autowired
+  public AuthController(UserRepository userRepository) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = new BCryptPasswordEncoder();
+  }
 
-    private static ResponseEntity<ApiError> getUnauthorizedMessage() {
-	ApiError apiError = new ApiError(UNAUTHORIZED_CODE, "Unauthorized request", "/api/1.0/auth");
-	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
-    }
+  private static ResponseEntity<ApiError> getUnauthorizedMessage() {
+    ApiError apiError = new ApiError(UNAUTHORIZED_CODE, "Unauthorized request", "/api/1.0/auth");
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
+  }
 
-    @PostMapping("/api/1.0/auth")
-    public ResponseEntity<?> handleAuthentication(
-	    @RequestHeader(name = "Authorization", required = false) String authorization) {
-	if (authorization == null) {
-	    return getUnauthorizedMessage();
-	}
-	log.info(authorization);
-	String base64encoded = authorization.split("Basic ")[1];
-	String decoded = new String(Base64.getDecoder().decode(base64encoded));
-	String username = decoded.split(":")[0];
-	String password = decoded.split(":")[1];
-	User userInDb = userRepository.getUserByUsername(username);
-	if (userInDb == null) {
-	    return getUnauthorizedMessage();
-	}
-	String hashedPassword = userInDb.getPassword();
-	// NOSONAR BCrypt.checkpw(password, hashedPassword);
-	if (!passwordEncoder.matches(password, hashedPassword)) {
-	    return getUnauthorizedMessage();
-	}
-	UserOutput userOutput = new UserOutput();
-	userOutput.setUsername(userInDb.getUsername());
-	userOutput.setDisplayName(userInDb.getDisplayName());
-	userOutput.setImage(userInDb.getImage());
-	return ResponseEntity.ok().body(userOutput);
+  @PostMapping("/api/1.0/auth")
+  public ResponseEntity<?>
+      handleAuthentication(@RequestHeader(name = "Authorization", required = false) String authorization) {
+    if (authorization == null) {
+      return getUnauthorizedMessage();
     }
+    log.info(authorization);
+    String base64encoded = authorization.split("Basic ")[1];
+    String decoded = new String(Base64.getDecoder().decode(base64encoded));
+    String username = decoded.split(":")[0];
+    String password = decoded.split(":")[1];
+    User userInDb = userRepository.getUserByUsername(username);
+    if (userInDb == null) {
+      return getUnauthorizedMessage();
+    }
+    String hashedPassword = userInDb.getPassword();
+    // NOSONAR BCrypt.checkpw(password, hashedPassword);
+    if (!passwordEncoder.matches(password, hashedPassword)) {
+      return getUnauthorizedMessage();
+    }
+    UserOutput userOutput = new UserOutput();
+    userOutput.setUsername(userInDb.getUsername());
+    userOutput.setDisplayName(userInDb.getDisplayName());
+    userOutput.setImage(userInDb.getImage());
+    return ResponseEntity.ok().body(userOutput);
+  }
 }

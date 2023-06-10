@@ -8,5 +8,5 @@ import net.okur.talkie.model.output.UserOutput;
  */
 public interface UserService {
 
-    UserOutput createUser(UserInput userInput);
+  UserOutput createUser(UserInput userInput);
 }

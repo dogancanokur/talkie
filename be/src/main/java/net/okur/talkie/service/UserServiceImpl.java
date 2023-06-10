@@ -16,37 +16,37 @@ import net.okur.talkie.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-	this.userRepository = userRepository;
-	this.passwordEncoder = new BCryptPasswordEncoder();
+  @Autowired
+  public UserServiceImpl(UserRepository userRepository) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = new BCryptPasswordEncoder();
+  }
+
+  @Override
+  public UserOutput createUser(UserInput userInput) {
+    User savedUser = userRepository.getUserByUsername(userInput.getUsername());
+    if (savedUser == null) {
+
+      User user = new User();
+      user.setUsername(userInput.getUsername());
+      user.setDisplayName(userInput.getDisplayName());
+      String encryptedPassword = passwordEncoder.encode(userInput.getPassword());
+      user.setPassword(encryptedPassword);
+      user = userRepository.save(user);
+
+      UserOutput userOutput = new UserOutput();
+      userOutput.setUsername(user.getUsername());
+      userOutput.setDisplayName(user.getDisplayName());
+      return userOutput;
+
+    } else {
+      UserOutput userOutput = new UserOutput();
+      userOutput.setUsername(savedUser.getUsername());
+      userOutput.setDisplayName(savedUser.getDisplayName());
+      return userOutput;
     }
-
-    @Override
-    public UserOutput createUser(UserInput userInput) {
-	User savedUser = userRepository.getUserByUsername(userInput.getUsername());
-	if (savedUser == null) {
-
-	    User user = new User();
-	    user.setUsername(userInput.getUsername());
-	    user.setDisplayName(userInput.getDisplayName());
-	    String encryptedPassword = passwordEncoder.encode(userInput.getPassword());
-	    user.setPassword(encryptedPassword);
-	    user = userRepository.save(user);
-
-	    UserOutput userOutput = new UserOutput();
-	    userOutput.setUsername(user.getUsername());
-	    userOutput.setDisplayName(user.getDisplayName());
-	    return userOutput;
-
-	} else {
-	    UserOutput userOutput = new UserOutput();
-	    userOutput.setUsername(savedUser.getUsername());
-	    userOutput.setDisplayName(savedUser.getDisplayName());
-	    return userOutput;
-	}
-    }
+  }
 }

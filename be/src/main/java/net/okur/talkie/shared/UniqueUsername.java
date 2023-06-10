@@ -16,9 +16,9 @@ import jakarta.validation.Payload;
 @Retention(RUNTIME)
 @Constraint(validatedBy = { UniqueUsernameValidator.class })
 public @interface UniqueUsername {
-    String message() default "{talkie.validation.constraints.UniqueUsername.message}";
+  String message() default "{talkie.validation.constraints.UniqueUsername.message}";
 
-    Class<?>[] groups() default {};
+  Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+  Class<? extends Payload>[] payload() default {};
 }
