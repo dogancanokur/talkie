@@ -1,5 +1,8 @@
 package net.okur.talkie.entity;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +18,9 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 8615325071140143848L;
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column(name = "id")
