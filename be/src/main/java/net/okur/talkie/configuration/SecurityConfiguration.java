@@ -36,7 +36,7 @@ public class SecurityConfiguration {
 
     http//
         .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-            .requestMatchers(HttpMethod.POST, "/api/1.0/auth", "/api/1.0/users").permitAll())
+            .requestMatchers(HttpMethod.POST, "/api/1.0/auth", "/api/1.0/users", "/error").permitAll())
         .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
             .anyRequest().authenticated());
 
@@ -44,6 +44,7 @@ public class SecurityConfiguration {
 
     http.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
     return http.build();
   }
 
