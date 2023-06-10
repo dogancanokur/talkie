@@ -36,11 +36,7 @@ public class SecurityConfiguration {
 
     http//
         .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-            .requestMatchers(HttpMethod.POST, "/api/1.0/auth", "/api/1.0/users").permitAll())/*
-        .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-            .requestMatchers(HttpMethod.GET, "/not-secured").permitAll())
-        .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-            .requestMatchers("/secured").authenticated());*/
+            .requestMatchers(HttpMethod.POST, "/api/1.0/auth", "/api/1.0/users").permitAll())
         .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
             .anyRequest().authenticated());
 
