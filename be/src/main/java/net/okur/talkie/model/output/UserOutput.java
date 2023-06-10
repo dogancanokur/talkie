@@ -9,4 +9,5 @@ import lombok.Data;
 public class UserOutput {
     String username;
     String displayName;
+    String image;
 }

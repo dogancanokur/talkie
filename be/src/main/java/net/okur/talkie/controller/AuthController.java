@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 import net.okur.talkie.entity.User;
 import net.okur.talkie.error.ApiError;
+import net.okur.talkie.model.output.UserOutput;
 import net.okur.talkie.repository.UserRepository;
 
 /**
@@ -57,6 +58,10 @@ public class AuthController {
 	if (!passwordEncoder.matches(password, hashedPassword)) {
 	    return getUnauthorizedMessage();
 	}
-	return ResponseEntity.ok().build();
+	UserOutput userOutput = new UserOutput();
+	userOutput.setUsername(userInDb.getUsername());
+	userOutput.setDisplayName(userInDb.getDisplayName());
+	userOutput.setImage(userInDb.getImage());
+	return ResponseEntity.ok().body(userOutput);
     }
 }
