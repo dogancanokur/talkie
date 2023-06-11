@@ -49,6 +49,7 @@ class LoginPage extends React.Component {
         this.setState({error: null});
         try {
             const response = await login(creds);
+            this.props.history.push('/');
             console.table(response.data);
         } catch (apiError) {
             this.setState({
