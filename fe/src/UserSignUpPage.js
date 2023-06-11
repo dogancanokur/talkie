@@ -3,6 +3,7 @@ import {signup} from "./apiCalls";
 import Input from "./components/Input";
 import ButtonWithProgress from "./components/ButtonWithProgress";
 import {withTranslation} from "react-i18next";
+import {withApiProgress} from "./shared/ApiProgress";
 
 class UserSignUpPage extends React.Component {
 
@@ -73,4 +74,5 @@ class UserSignUpPage extends React.Component {
 }
 
 const SignUpPageWithTranslations = withTranslation()(UserSignUpPage);
-export default SignUpPageWithTranslations;
+const SignUpPageWithApiProgress = withApiProgress(SignUpPageWithTranslations, '/api/1.0/users');
+export default SignUpPageWithApiProgress;
