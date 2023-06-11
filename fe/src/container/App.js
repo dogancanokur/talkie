@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {HashRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import LoginPage from "../LoginPage";
 import UserSignUpPage from "../UserSignUpPage";
 import 'bootstrap';
@@ -9,7 +9,7 @@ import {UserPage} from "../UserPage";
 
 function App() {
     return (<div>
-        <Router>{/*<BrowserRouter>*/}
+        <Router>
             <Navbar></Navbar>
             <div className={'container'}>
                 <div className={'row'}>
