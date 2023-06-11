@@ -1,17 +1,28 @@
 import React from "react";
-import UserSignUpPage from "../UserSignUpPage";
-import LanguageSelector from "../components/LanguageSelector";
+import Navbar from "../components/Navbar";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import LoginPage from "../LoginPage";
+import UserSignUpPage from "../UserSignUpPage";
+import 'bootstrap';
+import HomePage from "../HomePage";
+import {UserPage} from "../UserPage";
 
 function App() {
-    return (<div className={'row'}>
-        <div className="col">
-            <UserSignUpPage/>
-        </div>
-        <div className="col">
-            <LoginPage/>
-        </div>
-        <LanguageSelector/>
+    return (<div>
+        <Router>{/*<BrowserRouter>*/}
+            <Navbar></Navbar>
+            <div className={'container'}>
+                <div className={'row'}>
+                    <Switch>
+                        <Route exact path={'/'} component={HomePage}></Route>
+                        <Route path={'/login'} component={LoginPage}></Route>
+                        <Route path={'/signup'} component={UserSignUpPage}></Route>
+                        <Route path={'/user/:username'} component={UserPage}></Route>
+                        <Redirect to={'/'}></Redirect>
+                    </Switch>
+                </div>
+            </div>
+        </Router>
     </div>);
 }
 

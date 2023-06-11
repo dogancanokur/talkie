@@ -17,7 +17,7 @@ class LoginPage extends React.Component {
         return <div>
             <h1 className="text-center">{t('login')}</h1>
             <form className="container">
-                <Input id={'login_username'} name={'username'} label={t('signup.username')} autoComplete={'username'}
+                <Input id={'login_username'} name={'username'} label={t('username')} autoComplete={'username'}
                        isRequired={true} onChange={this.onChangeInput} type={'text'} container={'mb-3'}/>
                 <Input id={'login_password'} name={'password'} label={t('signup.password')} autoComplete={'password'}
                        isRequired={true} onChange={this.onChangeInput} type={'password'} container={'mb-3'}/>

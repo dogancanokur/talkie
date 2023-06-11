@@ -21,10 +21,10 @@ class UserSignUpPage extends React.Component {
                 {/*       info="We'll never share your email with anyone else."*/}
                 {/*       error={errors.email} onChange={this.onChangeInput} isRequired={true}*/}
                 {/*       type={'text'}/>*/}
-                <Input id={'username'} name={'username'} label={t('signup.username')} container={'mb-3'}
+                <Input id={'username'} name={'username'} label={t('username')} container={'mb-3'}
                        error={errors.username} onChange={this.onChangeInput} isRequired={true} autoComplete={'username'}
                        type={'text'}/>
-                <Input id={'displayName'} name={'displayName'} label={t('signup.displayName')} container={'mb-3'}
+                <Input id={'displayName'} name={'displayName'} label={t('displayName')} container={'mb-3'}
                        autoComplete={'displayName'} error={errors.displayName} onChange={this.onChangeInput}
                        isRequired={true}/>
                 <Input id={'password'} name={'password'} label={t('signup.password')} container={'mb-3'}
@@ -39,7 +39,7 @@ class UserSignUpPage extends React.Component {
                                     disabled={pendingApiCall || errors.repeatPassword}
                                     onClick={this.onClickSignUp}
                                     pendingApiCall={pendingApiCall}
-                                    text={t('signup.submit')}></ButtonWithProgress>
+                                    text={t('signup')}></ButtonWithProgress>
             </form>
         </div>;
     }

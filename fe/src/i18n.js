@@ -5,26 +5,28 @@ i18n.use(initReactI18next).init({
     resources: {
         en: {
             translations: {
-                'signup.username': 'Username',
-                'signup.displayName': 'Display Name',
-                'signup.submit': 'Sign Up',
+                'username': 'Username',
+                'displayName': 'Display Name',
+                'signup': 'Sign Up',
                 'signup.header': 'Sign Up',
                 'signup.password': 'Password',
                 'signup.repeatPassword': 'Repeat Password',
                 'signup.warning.passwordMismatch': 'Password mismatch',
                 'login': 'Login',
+                'home-page': 'Home Page'
             }
         },
         tr: {
             translations: {
-                'signup.username': 'Kullancı Adı',
-                'signup.displayName': 'Görünen İsim',
-                'signup.submit': 'Kayıt Ol',
+                'username': 'Kullancı Adı',
+                'displayName': 'Görünen İsim',
+                'signup': 'Kayıt Ol',
                 'signup.header': 'Kayıt Ol',
                 'signup.password': 'Şifre',
                 'signup.repeatPassword': 'Şifre Tekrarı',
                 'signup.warning.passwordMismatch': 'Şifreler eşleşmedi.',
-                'login': 'Giriş Yap'
+                'login': 'Giriş Yap',
+                'home-page': 'Ana Sayfa'
             }
         }
     },
