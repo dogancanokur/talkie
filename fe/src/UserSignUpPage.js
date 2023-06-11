@@ -1,19 +1,18 @@
 import React from "react";
 import {signup} from "./apiCalls";
 import Input from "./components/Input";
-import './i18n';
-import {withTranslation} from "react-i18next";
 import ButtonWithProgress from "./components/ButtonWithProgress";
+import {withTranslation} from "react-i18next";
 
 class UserSignUpPage extends React.Component {
 
     state = {
-        username: null, displayName: null, password: null, repeatPassword: null, pendingApiCall: false, errors: {}
+        username: null, displayName: null, password: null, repeatPassword: null, errors: {}
     }
 
     render() {
-        const {pendingApiCall, errors} = this.state;
-        const {t} = this.props;
+        const {errors} = this.state;
+        const {t, pendingApiCall} = this.props;
         return <div>
             <h1 className="text-center">{t('signup.header')}</h1>
             <form className="container">
@@ -60,21 +59,18 @@ class UserSignUpPage extends React.Component {
     }
     onClickSignUp = async (event) => {
         event.preventDefault();
-        this.setState({pendingApiCall: true});
         const {username, displayName, password} = this.state;
         const body = {username, displayName, password};
         try {
             const response = await signup(body);
             console.info(response.status + ' -> ' + response.data.message);
-            this.setState({pendingApiCall: false});
         } catch (e) {
             console.error(e.response.data);
             let {validationErrors} = e.response.data;
             this.setState({errors: validationErrors ? validationErrors : {}});
-            this.setState({pendingApiCall: false});
         }
     }
 }
 
-const UserSignUpPAgeWithTranslations = withTranslation()(UserSignUpPage);
-export default UserSignUpPAgeWithTranslations;
+const SignUpPageWithTranslations = withTranslation()(UserSignUpPage);
+export default SignUpPageWithTranslations;

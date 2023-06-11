@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './bootstrap-override.scss';
 import reportWebVitals from './reportWebVitals';
-import UserSignUpPage from "./UserSignUpPage";
-import LoginPage from "./LoginPage";
 import LanguageSelector from "./components/LanguageSelector";
+import ApiProgress from "./shared/ApiProgress";
+import LoginPage from "./LoginPage";
+import './i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-        <LoginPage/>
-        <UserSignUpPage/>
+root.render(<React.StrictMode>
+    <div>
+        <ApiProgress>
+            <LoginPage/>
+        </ApiProgress>
         <LanguageSelector/>
-    </React.StrictMode>
-);
+    </div>
+</React.StrictMode>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

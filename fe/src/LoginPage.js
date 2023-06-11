@@ -1,18 +1,17 @@
 import React from "react";
-import Input from "./components/Input";
-import {withTranslation} from "react-i18next";
 import {login} from "./apiCalls";
-import axios from "axios";
+import Input from "./components/Input";
 import ButtonWithProgress from "./components/ButtonWithProgress";
+import {withTranslation} from "react-i18next";
 
 class LoginPage extends React.Component {
     state = {
-        username: null, password: null, error: null, pendingApiCall: false
+        username: null, password: null, error: null
     }
 
     render() {
-        const {t} = this.props;
-        const {username, password, pendingApiCall} = this.state;
+        const {t, pendingApiCall} = this.props;
+        const {username, password} = this.state;
         const buttonEnabled = username && password;
         return <div>
             <h1 className="text-center">{t('login')}</h1>
@@ -31,7 +30,7 @@ class LoginPage extends React.Component {
                                     disabled={!buttonEnabled || pendingApiCall}
                                     onClick={this.onClickLogin}
                                     pendingApiCall={pendingApiCall}
-                                    text={t('login')}></ButtonWithProgress>
+                                    text={t('login')}/>
             </form>
         </div>;
     }
@@ -57,19 +56,6 @@ class LoginPage extends React.Component {
         }
     }
 
-    componentDidMount() {
-        axios.interceptors.request.use(request => {
-            this.setState({pendingApiCall: true});
-            return request;
-        });
-        axios.interceptors.response.use(response => {
-            this.setState({pendingApiCall: false});
-            return response;
-        }, error => {
-            this.setState({pendingApiCall: false});
-            throw error;
-        });
-    }
 }
 
 
