@@ -34,11 +34,8 @@ public class SecurityConfiguration {
         httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.authenticationEntryPoint((request, response,
             authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage())));
 
-    http//
-        .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-            .requestMatchers(HttpMethod.POST, "/api/1.0/auth", "/api/1.0/users", "/error").permitAll())
-        .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-            .anyRequest().authenticated());
+    http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+        .requestMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated().anyRequest().permitAll());
 
     http.userDetailsService(userAuthService);
 
