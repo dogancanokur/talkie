@@ -13,7 +13,8 @@ i18n.use(initReactI18next).init({
                 'signup.repeatPassword': 'Repeat Password',
                 'signup.warning.passwordMismatch': 'Password mismatch',
                 'login': 'Login',
-                'home-page': 'Home Page'
+                'home-page': 'Home Page',
+                'logout': 'Logout'
             }
         },
         tr: {
@@ -26,7 +27,8 @@ i18n.use(initReactI18next).init({
                 'signup.repeatPassword': 'Şifre Tekrarı',
                 'signup.warning.passwordMismatch': 'Şifreler eşleşmedi.',
                 'login': 'Giriş Yap',
-                'home-page': 'Ana Sayfa'
+                'home-page': 'Ana Sayfa',
+                'logout': 'Çıkış'
             }
         }
     },

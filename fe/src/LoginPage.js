@@ -25,7 +25,6 @@ class LoginPage extends React.Component {
                     {this.state.error}
                 </div>}
                 <ButtonWithProgress id={'login_button'}
-                                    type={'button'}
                                     className={'btn btn-lg btn-primary'}
                                     containerClassName={'text-center'}
                                     disabled={!buttonEnabled || pendingApiCall}
@@ -47,10 +46,11 @@ class LoginPage extends React.Component {
         const {username, password} = this.state;
         const creds = {username, password};
         this.setState({error: null});
+        const {history, onLoginSuccess} = this.props;
         try {
             const response = await login(creds);
-            this.props.history.push('/');
-            console.table(response.data);
+            history.push('/'); // redirect to '/'
+            onLoginSuccess(response.data.username);
         } catch (apiError) {
             this.setState({
                 error: apiError.response.data.message

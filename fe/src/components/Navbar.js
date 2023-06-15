@@ -3,54 +3,56 @@ import LanguageSelector from "./LanguageSelector";
 import {Link} from "react-router-dom";
 import {withTranslation} from "react-i18next";
 
-function Navbar(props) {
+class Navbar extends React.Component {
+    render() {
+        const {isLoggedIn, username, t} = this.props;
 
-    const {t} = props;
-    return (<nav className={'container'}>
-        <header className={'d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom'}>
-            <Link to={'/'}
-                  className={'d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none'}>
-                <img src={process.env.PUBLIC_URL + '/logo192.png'} alt="logo" width={70}/>
-            </Link>
+        let links = (<ul className={'nav nav-pills'}>
+            <li className="nav-item">
+                <Link to={'/'} className="nav-link" aria-current="page">{t('home-page')}</Link></li>
+            <li className="nav-item">
+                <Link to={'/signup'} className="nav-link">{t('signup')}</Link>
+            </li>
+            <li className="nav-item">
+                <Link to={'/login'} className="nav-link">{t('login')}</Link>
+            </li>
+            <li className={'nav-item'}>
+                <LanguageSelector/>
+            </li>
+        </ul>);
 
-            <ul className={'nav nav-pills'}>
+        if (isLoggedIn) {
+            links = (<ul className={'nav nav-pills'}>
                 <li className="nav-item">
-                    <Link to={'/'} className="nav-link active" aria-current="page">{t('home-page')}</Link></li>
-                <li className="nav-item">
-                    <Link to={'/signup'} className="nav-link">{t('signup')}</Link>
+                    <Link to={`/user/${username}`} className="nav-link">{username}</Link>
                 </li>
-                <li className="nav-item">
-                    <Link to={'/login'} className="nav-link">{t('login')}</Link>
+                <li className="nav-link" style={{cursor: "pointer"}} onClick={this.props.onLogoutSuccess}>
+                    {t('logout')}
                 </li>
-            </ul>
+                <li className={'nav-item'}>
+                    <LanguageSelector/>
+                </li>
+            </ul>)
+        }
 
-            <div className="dropdown text-end">
-                <Link to={'/#'} className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                    <img
-                        src={process.env.PUBLIC_URL + '/no-image.png'}
-                        alt="mdo" width="32" height="32"
-                        className="rounded-circle"/>
-                </Link>
-                <ul className="dropdown-menu text-small">
-                    <li>
-                        <Link className="dropdown-item" to={'/#'}>{t('nothing')}</Link>
-                        <Link className="dropdown-item" to={'/#'}>{t('nothing')}</Link>
-                    </li>
-                    <li>
-                        <hr className="dropdown-divider"/>
-                    </li>
-                    <li>
-                        <LanguageSelector/>
-                    </li>
-                    <li>
-                        <hr className="dropdown-divider"/>
-                    </li>
-                    <li><Link className="dropdown-item" to={'/sign-out'}>Sign out</Link></li>
-                </ul>
-            </div>
-        </header>
-    </nav>);
+        return (
+            <nav className="navbar navbar-expand-lg shadow-sm bg-body-tertiary">
+                <div className="container-fluid">
+                    <Link to={'/'}
+                          className={'d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none'}>
+                        <img src={process.env.PUBLIC_URL + '/logo192.png'} alt="logo" width={70}/>
+                    </Link>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className={'collapse justify-content-end navbar-collapse'} id="navbarNavDropdown">
+                        {links}
+                    </div>
+                </div>
+            </nav>);
+    }
 }
 
 export default withTranslation()(Navbar);

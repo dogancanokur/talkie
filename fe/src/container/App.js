@@ -5,25 +5,44 @@ import LoginPage from "../LoginPage";
 import UserSignUpPage from "../UserSignUpPage";
 import 'bootstrap';
 import HomePage from "../HomePage";
-import {UserPage} from "../UserPage";
+import UserPage from "../UserPage";
 
-function App() {
-    return (<div>
-        <Router>
-            <Navbar></Navbar>
-            <div className={'container'}>
-                <div className={'row'}>
-                    <Switch>
-                        <Route exact path={'/'} component={HomePage}></Route>
-                        <Route path={'/login'} component={LoginPage}></Route>
-                        <Route path={'/signup'} component={UserSignUpPage}></Route>
-                        <Route path={'/user/:username'} component={UserPage}></Route>
-                        <Redirect to={'/'}></Redirect>
-                    </Switch>
+class App extends React.Component {
+    state = {
+        username: null,
+        isLoggedIn: false,
+    }
+    onLoginSuccess = (username) => {
+        this.setState({username, isLoggedIn: true});
+    }
+    onLogoutSuccess = () => {
+        this.setState({username: null, isLoggedIn: false});
+    }
+
+    render() {
+        const {username, isLoggedIn} = this.state;
+        return (<div>
+            <Router>
+                <Navbar username={username} isLoggedIn={isLoggedIn} onLogoutSuccess={this.onLogoutSuccess}></Navbar>
+                <div className={'container'}>
+                    <div className={'row'}>
+                        <Switch>
+                            <Route exact path={'/'} component={HomePage}></Route>
+                            {/*props => reactRouterProps*/}
+                            {!isLoggedIn &&
+                                <Route path={'/login'} component={(props) => {
+                                    return <LoginPage {...props} onLoginSuccess={this.onLoginSuccess}/>;
+                                }}></Route>}
+                            {!isLoggedIn &&
+                                <Route path={'/signup'} component={UserSignUpPage}></Route>}
+                            <Route path={'/user/:username'} component={UserPage}></Route>
+                            <Redirect to={'/'}></Redirect>
+                        </Switch>
+                    </div>
                 </div>
-            </div>
-        </Router>
-    </div>);
+            </Router>
+        </div>);
+    }
 }
 
 export default App;
