@@ -29,13 +29,13 @@ class App extends React.Component {
                         <Switch>
                             <Route exact path={'/'} component={HomePage}></Route>
                             {/*props => reactRouterProps*/}
-                            {!isLoggedIn &&
-                                <Route path={'/login'} component={(props) => {
-                                    return <LoginPage {...props} onLoginSuccess={this.onLoginSuccess}/>;
-                                }}></Route>}
-                            {!isLoggedIn &&
-                                <Route path={'/signup'} component={UserSignUpPage}></Route>}
-                            <Route path={'/user/:username'} component={UserPage}></Route>
+                            {!isLoggedIn && <Route path={'/login'} component={(props) => {
+                                return <LoginPage {...props} onLoginSuccess={this.onLoginSuccess}/>;
+                            }}></Route>}
+                            {!isLoggedIn && <Route path={'/signup'} component={UserSignUpPage}></Route>}
+                            <Route path={'/user/:username'} component={(props) => {
+                                return <UserPage {...props} username={username}/>
+                            }}></Route>
                             <Redirect to={'/'}></Redirect>
                         </Switch>
                     </div>

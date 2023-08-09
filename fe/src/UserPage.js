@@ -1,9 +1,11 @@
 import React from "react";
+import ProfileCard from "./assets/ProfileCard";
 
-
-function UserPage() {
+const UserPage = (props) => {
     return (
-        <div>UserPage</div>
+        <div className={'container'}>
+            <ProfileCard username={props.username}/>
+        </div>
     );
 }
 
