@@ -8,27 +8,18 @@ import HomePage from "../HomePage";
 import UserPage from "../UserPage";
 
 class App extends React.Component {
-    state = {
-        username: null,
-        isLoggedIn: false,
-    }
-    onLoginSuccess = (username) => {
-        this.setState({username, isLoggedIn: true});
-    }
-    onLogoutSuccess = () => {
-        this.setState({username: null, isLoggedIn: false});
-    }
-
     render() {
-        const {username, isLoggedIn} = this.state;
+        // const {username, isLoggedIn} = this.state;
+
+        const isLoggedIn = false;
+        const username = undefined;
         return (<div>
             <Router>
-                <Navbar username={username} isLoggedIn={isLoggedIn} onLogoutSuccess={this.onLogoutSuccess}></Navbar>
+                <Navbar/>
                 <div className={'container'}>
                     <div className={'row'}>
                         <Switch>
                             <Route exact path={'/'} component={HomePage}></Route>
-                            {/*props => reactRouterProps*/}
                             {!isLoggedIn && <Route path={'/login'} component={(props) => {
                                 return <LoginPage {...props} onLoginSuccess={this.onLoginSuccess}/>;
                             }}></Route>}
