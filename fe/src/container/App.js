@@ -6,13 +6,10 @@ import UserSignUpPage from "../UserSignUpPage";
 import 'bootstrap';
 import HomePage from "../HomePage";
 import UserPage from "../UserPage";
-import {Authentication} from "../shared/AuthenticationContext";
 
 class App extends React.Component {
-    static contextType = Authentication;
-
     render() {
-        const {isLoggedIn} = this.context.state;
+        const {isLoggedIn} = false;
         return (<div>
             <Router>
                 <Navbar/>

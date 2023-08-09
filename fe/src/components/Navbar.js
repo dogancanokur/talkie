@@ -2,16 +2,16 @@ import React from 'react';
 import LanguageSelector from "./LanguageSelector";
 import {Link} from "react-router-dom";
 import {withTranslation} from "react-i18next";
-import {Authentication} from "../shared/AuthenticationContext";
 
 class Navbar extends React.Component {
-    static contextType = Authentication;
 
     render() {
         const {t} = this.props;
 
-        const {state, onLogoutSuccess} = this.context;
-        const {isLoggedIn, username} = state;
+        const onLogoutSuccess = () => {
+        };
+        const isLoggedIn = false;
+        const username = undefined;
 
         let links = (<ul className={'nav nav-pills'}>
             <li className="nav-item">

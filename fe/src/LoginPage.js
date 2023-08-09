@@ -4,10 +4,8 @@ import Input from "./components/Input";
 import ButtonWithProgress from "./components/ButtonWithProgress";
 import {withTranslation} from "react-i18next";
 import {withApiProgress} from "./shared/ApiProgress";
-import {Authentication} from "./shared/AuthenticationContext";
 
 class LoginPage extends React.Component {
-    static contextType = Authentication;
     state = {
         username: null, password: null, error: null
     }
@@ -48,7 +46,8 @@ class LoginPage extends React.Component {
         const {username, password} = this.state;
         const creds = {username, password};
         this.setState({error: null});
-        const {onLoginSuccess} = this.context;
+        const {onLoginSuccess} = () => {
+        };
         const {history} = this.props;
         try {
             const response = await login(creds);
