@@ -14,7 +14,9 @@ i18n.use(initReactI18next).init({
                 'signup.warning.passwordMismatch': 'Password mismatch',
                 'login': 'Login',
                 'home-page': 'Home Page',
-                'logout': 'Logout'
+                'logout': 'Logout',
+                'we can edit': 'We can edit',
+                'we cannot edit': 'We cannot edit'
             }
         },
         tr: {
@@ -28,7 +30,9 @@ i18n.use(initReactI18next).init({
                 'signup.warning.passwordMismatch': 'Şifreler eşleşmedi.',
                 'login': 'Giriş Yap',
                 'home-page': 'Ana Sayfa',
-                'logout': 'Çıkış'
+                'logout': 'Çıkış',
+                'we can edit': 'Düzenleyebiliriz',
+                'we cannot edit': 'Düzenleyemeyiz'
             }
         }
     },
