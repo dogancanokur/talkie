@@ -1,9 +1,9 @@
 import React from "react";
-import {signup} from "./apiCalls";
-import Input from "./components/Input";
-import ButtonWithProgress from "./components/ButtonWithProgress";
+import {signup} from "../api/apiCalls";
+import Input from "../components/Input";
+import ButtonWithProgress from "../components/ButtonWithProgress";
 import {withTranslation} from "react-i18next";
-import {withApiProgress} from "./shared/ApiProgress";
+import {withApiProgress} from "../shared/ApiProgress";
 
 class UserSignUpPage extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {axiosChangeLanguage} from "../apiCalls";
+import {axiosChangeLanguage} from "../api/apiCalls";
 import {withTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 

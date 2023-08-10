@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileCard from "./assets/ProfileCard";
+import ProfileCard from "../assets/ProfileCard";
 
 const UserPage = (props) => {
     return (

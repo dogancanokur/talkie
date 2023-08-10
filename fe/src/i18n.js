@@ -16,7 +16,8 @@ i18n.use(initReactI18next).init({
                 'home-page': 'Home Page',
                 'logout': 'Logout',
                 'we can edit': 'We can edit',
-                'we cannot edit': 'We cannot edit'
+                'we cannot edit': 'We cannot edit',
+                'HomePage': 'Home Page'
             }
         },
         tr: {
@@ -32,7 +33,8 @@ i18n.use(initReactI18next).init({
                 'home-page': 'Ana Sayfa',
                 'logout': 'Çıkış',
                 'we can edit': 'Düzenleyebiliriz',
-                'we cannot edit': 'Düzenleyemeyiz'
+                'we cannot edit': 'Düzenleyemeyiz',
+                'HomePage': 'Ana Sayfa'
             }
         }
     },

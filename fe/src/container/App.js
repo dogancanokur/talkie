@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import {HashRouter as Router, Redirect, Route, Switch} from "react-router-dom";
-import LoginPage from "../LoginPage";
-import UserSignUpPage from "../UserSignUpPage";
+import LoginPage from "../pages/LoginPage";
+import UserSignUpPage from "../pages/UserSignUpPage";
 import 'bootstrap';
-import HomePage from "../HomePage";
-import UserPage from "../UserPage";
+import HomePage from "../pages/HomePage";
+import UserPage from "../pages/UserPage";
 
 class App extends React.Component {
     render() {

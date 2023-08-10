@@ -1,9 +1,9 @@
 import React from "react";
-import {login} from "./apiCalls";
-import Input from "./components/Input";
-import ButtonWithProgress from "./components/ButtonWithProgress";
+import {login} from "../api/apiCalls";
+import Input from "../components/Input";
+import ButtonWithProgress from "../components/ButtonWithProgress";
 import {withTranslation} from "react-i18next";
-import {withApiProgress} from "./shared/ApiProgress";
+import {withApiProgress} from "../shared/ApiProgress";
 
 class LoginPage extends React.Component {
     state = {
