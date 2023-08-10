@@ -5,25 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import './i18n';
 import App from "./container/App";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
-
-const loggedInState = {
-    isLoggedIn: true, username: 'dogan', password: 'dogan', displayName: 'dogan', image: null
-}
-const defaultState = {
-    isLoggedIn: false, username: null, password: null, displayName: null, image: null
-}
-const reducer = (state = {...defaultState}, action) => {
-    console.warn(action);
-    if (action.type === 'logout-success') {
-        return defaultState;
-    }
-    return state;
-}
-const store = createStore(reducer, loggedInState);
+import configureStore from "./redux/configureStore";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Provider store={store}><App/></Provider>);
+root.render(<Provider store={configureStore()}><App/></Provider>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

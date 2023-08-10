@@ -3,17 +3,12 @@ import LanguageSelector from "./LanguageSelector";
 import {Link} from "react-router-dom";
 import {withTranslation} from "react-i18next";
 import {connect} from "react-redux";
+import {logoutSuccess} from '../redux/authActions';
 
 class Navbar extends React.Component {
-    onClickLogout = () => {
-        const action = {
-            type: 'logout-success'
-        }
-        this.props.dispatch(action);
-    }
 
     render() {
-        const {t, username, isLoggedIn} = this.props;
+        const {t, username, isLoggedIn, onLogoutSuccess} = this.props;
 
         let links = (<ul className={'nav nav-pills'}>
             <li className="nav-item">
@@ -31,7 +26,7 @@ class Navbar extends React.Component {
                 <li className="nav-item">
                     <Link to={`/user/${username}`} className="nav-link">{username}</Link>
                 </li>
-                <li className="nav-link" style={{cursor: "pointer"}} onClick={this.onClickLogout}>
+                <li className="nav-link" style={{cursor: "pointer"}} onClick={onLogoutSuccess}>
                     {t('logout')}
                 </li>
             </ul>)
@@ -58,8 +53,12 @@ const NavbarWithTranslation = withTranslation()(Navbar);
 const mapStateToProps = (stateInStore) => {
     return {
         // ...stateInStore
-        isLoggedIn: stateInStore.isLoggedIn,
-        username: stateInStore.username
+        isLoggedIn: stateInStore.isLoggedIn, username: stateInStore.username
     }
 }
-export default connect(mapStateToProps)(NavbarWithTranslation);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogoutSuccess: () => dispatch(logoutSuccess())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarWithTranslation);
